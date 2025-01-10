@@ -14,7 +14,7 @@ def step_impl_check_task_exists(context, task_name):
     tasks = context.todo_list.list_tasks()
     assert any(task["name"] == task_name for task in tasks), f"Task '{task_name}' not found"
 
-@given('the to-do list contains tasks:')
+@given('the to-do list contains tasks')
 def step_impl_given_tasks(context):
     context.todo_list = TodoList()
     for row in context.table:
@@ -24,12 +24,12 @@ def step_impl_given_tasks(context):
 def step_impl_list_tasks(context):
     context.listed_tasks = context.todo_list.list_tasks()
 
-@then('the output should contain:')
+@then('the output should contain')
 def step_impl_check_task_output(context):
     expected_output = context.text.strip().splitlines()
     actual_output = ["Tasks:"]
     actual_output.extend([f"- {task['name']}" for task in context.listed_tasks])
-    assert expected_output == actual_output, f"Expected: {expected_outout}, but got: {actual_output}"
+    assert expected_output == actual_output, f"Expected: {expected_output}, but got: {actual_output}"
 
 @when('the user marks task "{task_name}" as completed')
 def step_impl_mark_task_completed(context, task_name):
